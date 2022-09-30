@@ -133,11 +133,18 @@ section
     color: #333;
     font-size: 2em;
 }
+.titleTextaut
+{
+    color: #333;
+    font-size: 2em;
+    text-align: right;
+
+}
 .row .col50 .imgBox
 {
     position: relative;
     width: 100%;
-    min-height: 410px;
+    min-height: 700px;
     height: 100%;
 }
 .row .col50 .imgBox img
@@ -150,3 +157,9 @@ section
     height: 100%;
     object-fit: cover;
 }
+.grid-container {
+    display: grid;
+    margin-top: 50px;
+    grid-template-columns: auto auto auto auto;
+    gap: 50px;
+  }
