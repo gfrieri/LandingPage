@@ -190,13 +190,13 @@ section
 .row .col50contact{
     top: 50%;
     left: 10%;
-    transform: translate(105%, 10%);
+    transform: translate(110%, 10%);
 }
 .row .centergrid{
     top: 50%;
     left: 10%;
     -ms-transform: translate(-50%, 0);
-    transform: translate(10%, 0);
+    transform: translate(12%, 0);
 }
 .row .centergrid .texto{
     font-size: 3em;
@@ -206,6 +206,7 @@ section
     display: flex;
     align-items: right;
     justify-content: right;
+    transform: translate(3%, 0);
 }
 .row{
     display: flex;
