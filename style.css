@@ -58,7 +58,8 @@ section
     align-items: center;
     background: linear-gradient(90deg, #fff, #bba4c3);
 }
-.about {
+.about 
+{
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -82,11 +83,12 @@ section
 .contentbuscador .logo
 {
     position: relative;
-    width: 25%;
+    width: 20%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
 .contentbuscador .textBox a
 {
     display: inline-block;
@@ -98,12 +100,76 @@ section
     font-weight: 500;
     letter-spacing: 1px;
     text-decoration: none;
-    position: absolute;
+    position: relative;
     top: 110%;
     left: 50%;
     -ms-transform: translate(-70%, -50%);
     transform: translate(-70%, -50%);
 }
+
+.buscador{
+    position: relative;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+.buscadorText
+{
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buscador .searchbtn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 20px;
+    background: #bba4c3;
+    color: #fff;
+    border-radius: 40px;
+    font-weight: 500;
+    border: none;
+    letter-spacing: 1px;
+    text-decoration: none;
+    position: absolute;
+    outline: none;
+    top: 150%;
+    left: 50%;
+    -ms-transform: translate(-70%, -50%);
+    transform: translate(-70%, -50%);
+}
+
+.encontrado .textBox .searchbtn{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 20px;
+    background: #bba4c3;
+    color: #fff;
+    border-radius: 40px;
+    font-weight: 500;
+    border: none;
+    letter-spacing: 1px;
+    text-decoration: none;
+    position: absolute;
+    outline: none;
+    top: 17%;
+    left: 50%;
+    transform: translate(-70%, -50%);
+}
+
+.encontrado .tabla{
+    width: 100%;
+
+}
+
+.encontrado .tabla, th, td{
+    border: 1px solid;
+
+}
+
 .contentbuscador .textBox h2
 {
     color: #333;
