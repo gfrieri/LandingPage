@@ -1,53 +1,98 @@
+const OLIMPICA_URL = "https://www.olimpica.com/";
+const JUMBO_URL = "https://www.tiendasjumbo.co/";
+const D1_URL = "https://domicilios.tiendasd1.com/search?name=";
+
 const form = document.getElementById("formulario");
 function handleForm(event) {
   event.preventDefault();
 }
+
 form.addEventListener("submit", handleForm);
+
 document.getElementById("encontrado").style.display = "none";
 
+const createAnchoredLink = (storeName, productName) => {
+  if (storeName === "olimpica") return `${OLIMPICA_URL}${productName}`;
+  if (storeName === "jumbo") return `${JUMBO_URL}${productName}`;
+  if (storeName === "d1") return `${D1_URL}${productName}`;
+  return "#";
+};
+
+const createAnchoredElement = (storeName, productName) => {
+  const a = document.createElement("a");
+  a.href = createAnchoredLink(storeName, productName);
+  a.target = "_blank";
+  const img = document.createElement("img");
+  img.setAttribute("src", `img/${storeName}.jpg`);
+  img.classList.add("store-logo");
+  a.appendChild(img);
+  return a;
+};
+
 async function load() {
-  const productName = "aceite";
+  const productName = document.getElementById("query").value ?? "";
   const response = await fetch(
     `http://127.0.0.1:8000/productos?productName=${productName}`,
     {
       method: "GET",
       headers: new Headers({ "Content-type": "application/json" }),
-      mode: "cors",
+      withCredentials: false,
     }
   );
   const data = await response.json();
-  var tabla = document.getElementById("tabla");
+  var div = document.getElementById("encontrado");
 
-  // console.log(data)
-  // data.dataseries.forEach((element, index) => {
-  //   /*
-  //   lifted_index: 6
-  //   prec_type: "none"
-  //   */
-  //   const rowIndex = document.createTextNode(index + 1);
-  //   const liftedIndex = document.createTextNode(element.lifted_index);
-  //   const precType = document.createTextNode(element.prec_type);
-  //   const td1 = document.createElement("td");
-  //   const td2 = document.createElement("td");
-  //   const td3 = document.createElement("td");
-  //   const tr = document.createElement("tr");
+  const table = document.createElement("table");
+  table.id = "tabla";
+  table.classList.add("tabla");
+  const headerTr = document.createElement("tr");
+  const headerName = document.createElement("td");
+  const headerPrice = document.createElement("td");
+  const headerStore = document.createElement("td");
+  const nameText = document.createTextNode("Nombre");
+  const priceText = document.createTextNode("Precio");
+  const storeText = document.createTextNode("Tienda");
+  headerName.appendChild(nameText);
+  headerPrice.appendChild(priceText);
+  headerStore.appendChild(storeText);
 
-  //   td1.appendChild(rowIndex);
-  //   td2.appendChild(liftedIndex);
-  //   td3.appendChild(precType);
+  headerTr.appendChild(headerName);
+  headerTr.appendChild(headerPrice);
+  headerTr.appendChild(headerStore);
 
-  //   tr.appendChild(td1);
-  //   tr.appendChild(td2);
-  //   tr.appendChild(td3);
+  table.appendChild(headerTr);
 
-  //   tabla.appendChild(tr);
-  //   console.log(index);
-  // });
-  console.log(data);
+  data.forEach((element) => {
+    const name = document.createTextNode(element.nombre);
+    const price = document.createTextNode(element.precio);
+    const store = createAnchoredElement(element.tienda, element.nombre);
+
+    const td1 = document.createElement("td");
+    const td2 = document.createElement("td");
+    const td3 = document.createElement("td");
+    const tr = document.createElement("tr");
+
+    td1.appendChild(name);
+    td2.appendChild(price);
+    td3.appendChild(store);
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+
+    table.appendChild(tr);
+  });
+  div.appendChild(table);
 }
 
 function search() {
   document.getElementById("encontrado").style.display = "block";
   document.getElementById("buscar").style.display = "none";
   load();
+}
+
+function goBack() {
+  document.getElementById("encontrado").style.display = "none";
+  document.getElementById("buscar").style.display = "block";
+  document.getElementById("tabla").remove();
 }
